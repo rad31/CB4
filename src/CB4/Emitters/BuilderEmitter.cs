@@ -13,20 +13,17 @@ internal static class BuilderEmitter
     internal static string Emit(BuildableModel model)
     {
         var stringBuilder = new StringBuilder();
-        var header = GetHeader(model);
-        var constructor = GetConstructor(model);
-        const string footer = "}";
         
-        stringBuilder.AppendLine(header);
+        stringBuilder.AppendLine(GetHeader(model));
+        stringBuilder.AppendLine(GetBuilderConstructors(model));
 
         foreach (var property in model.Properties)
         {
-            var setter = GetSetter(model, property);
-            stringBuilder.AppendLine(setter);
+            stringBuilder.AppendLine(GetSetter(model, property));
         }
         
-        stringBuilder.AppendLine(constructor);
-        stringBuilder.AppendLine(footer);
+        stringBuilder.AppendLine(GetBuildMethod(model));
+        stringBuilder.AppendLine(GetFooter(model));
         
         return stringBuilder.ToString();
     }
@@ -42,15 +39,13 @@ internal static class BuilderEmitter
 
             namespace {{model.Ns}};
 
-            public class {{builderName}}
+            public partial class {{builderName}}
             {
-                private {{proxyName}} {{BackingFieldName}} = new();
-
-                public static implicit operator {{model.Name}}({{builderName}} builder) => builder.Build();
+                private {{proxyName}} {{BackingFieldName}};
             """;
     }
     
-    private static string GetConstructor(BuildableModel model)
+    private static string GetBuildMethod(BuildableModel model)
     {
         return model.ContructorType switch
         {
@@ -122,6 +117,44 @@ internal static class BuilderEmitter
         return stringBuilder.ToString();
     }
 
+    private static string GetBuilderConstructors(BuildableModel model)
+    {
+        var builderName = GetBuilderName(model);
+        var argumentName = model.Name.ToCamelCase();
+        var proxyName = GetProxyName(model);
+        var stringBuilder = new StringBuilder();
+        
+        var header = $$"""
+            
+                public {{builderName}}()
+                {
+                    {{BackingFieldName}} = new();
+                }
+                
+                public {{builderName}}({{model.Name}} {{argumentName}})
+                {
+                   {{BackingFieldName}} = new {{proxyName}}
+                   {
+            """;
+        
+        var footer = """
+                };
+            }
+        """;
+        
+        
+        stringBuilder.AppendLine(header);
+        
+        foreach (var property in model.Properties)
+        {
+            stringBuilder.AppendLine($"            {property.Name} = {argumentName}.{property.Name},");
+        }
+
+        stringBuilder.AppendLine(footer);
+        
+        return stringBuilder.ToString();
+    }
+
     private static string GetSetter(BuildableModel model, BuildableModelProperty property)
     {
         var builderName = GetBuilderName(model);
@@ -133,6 +166,17 @@ internal static class BuilderEmitter
                     {{BackingFieldName}}.{{property.Name}} = {{argumentName}};
                     return this;    
                 }
+            """;
+    }
+
+    private static string GetFooter(BuildableModel model)
+    {
+        var builderName = GetBuilderName(model);
+        
+        return $$"""
+            
+                public static implicit operator {{model.Name}}({{builderName}} builder) => builder.Build();
+            }     
             """;
     }
     

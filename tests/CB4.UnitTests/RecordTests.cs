@@ -37,4 +37,22 @@ public class RecordTests
         
         Assert.Equal(vaccinationDate, pet.VaccinationDate);
     }
+
+    [Fact]
+    public void TestDefaults()
+    {
+        var name = "Buddy";
+        var defaults = new Pet(
+            "Charlie",
+            4,
+            new DateTime(2026, 1, 1));
+        var pet = new PetBuilder(defaults)
+            .WithName(name)
+            .Build();
+        
+        Assert.Equal(defaults.Age, pet.Age);
+        Assert.Equal(defaults.VaccinationDate, pet.VaccinationDate);
+        Assert.NotEqual(defaults.Name, pet.Name);
+        Assert.Equal(name, pet.Name);
+    }
 }
