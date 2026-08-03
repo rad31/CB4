@@ -1,4 +1,4 @@
-﻿using CB4.UnitTests.ExampleClasses;
+﻿using CB4.UnitTests.Models;
 
 namespace CB4.UnitTests;
 
@@ -7,44 +7,44 @@ public class PocoTests
     [Fact]
     public void TestFirstName()
     {
-        var firstName = "Foo";
+        const string firstName = "Foo";
         var student = new StudentBuilder()
             .WithFirstName(firstName)
             .Build();
 
-        Assert.Equal(student.FirstName, firstName);
+        Assert.Equal(firstName, student.FirstName);
     }
     
     [Fact]
     public void TestLastName()
     {
-        var lastName = "Bar";
+        const string lastName = "Bar";
         var student = new StudentBuilder()
             .WithLastName(lastName)
             .Build();
 
-        Assert.Equal(student.LastName, lastName);
+        Assert.Equal(lastName, student.LastName);
     }
     
     [Fact]
     public void TestStudentId()
     {
-        var id = "12345";
+        const string id = "12345";
         var student = new StudentBuilder()
             .WithStudentId(id)
             .Build();
 
-        Assert.Equal(student.StudentId, id);
+        Assert.Equal(id, student.StudentId);
     }
     
     [Fact]
     public void TestGradePointAverage()
     {
-        var gpa = 3.45;
+        const double gpa = 3.45;
         var student = new StudentBuilder()
             .WithGradePointAverage(gpa)
             .Build();
 
-        Assert.Equal(student.GradePointAverage, gpa);
+        Assert.Equal(gpa, student.GradePointAverage);
     }
 }

@@ -1,9 +1,9 @@
 using System;
 using Buildable.Attributes;
 
-namespace CB4.UnitTests.ExampleClasses;
+namespace CB4.UnitTests.Models;
 
-// [Buildable]
+[Buildable]
 public record Pet(
     string Name,
     int Age,
