@@ -47,7 +47,7 @@ public class BuilderGenerator : IIncrementalGenerator
                 foreach (var model in source)
                 {
                     spc.CancellationToken.ThrowIfCancellationRequested();
-                    spc.AddSource($"{model.Name}Proxy.g.cs", ProxyEmitter.Emit(model));
+                    spc.AddSource($"{model.Name}Builder.Proxy.g.cs", ProxyEmitter.Emit(model));
                     spc.AddSource($"{model.Name}Builder.g.cs", BuilderEmitter.Emit(model));
                 }
             });

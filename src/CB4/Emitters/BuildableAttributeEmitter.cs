@@ -15,7 +15,7 @@ internal static class BuildableAttributeEmitter
             namespace {{AttributeNamespace}};
 
             [AttributeUsage(AttributeTargets.Class)]
-            internal class {{AttributeName}} : Attribute
+            internal sealed class {{AttributeName}} : Attribute
             {
                 public {{AttributeName}}() {}
             }
