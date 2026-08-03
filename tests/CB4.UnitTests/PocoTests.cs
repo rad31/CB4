@@ -2,7 +2,7 @@
 
 namespace CB4.UnitTests;
 
-public class StudentTests
+public class PocoTests
 {
     [Fact]
     public void TestFirstName()
