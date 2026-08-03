@@ -6,7 +6,7 @@ using CB4.Models;
 
 namespace CB4.Emitters;
 
-internal static class PocoEmitter
+internal static class BuilderEmitter
 {
     private const string BackingFieldName = "_proxy";
     
@@ -127,6 +127,7 @@ internal static class PocoEmitter
         var builderName = GetBuilderName(model);
         var argumentName = property.Name.ToCamelCase();
         return $$"""
+            
                 public {{builderName}} With{{property.Name}}({{property.FullyQualifiedType}} {{argumentName}})
                 {
                     {{BackingFieldName}}.{{property.Name}} = {{argumentName}};

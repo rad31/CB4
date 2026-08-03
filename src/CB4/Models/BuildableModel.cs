@@ -7,3 +7,4 @@ public record struct BuildableModel(
     string Name,
     ConstructorType ContructorType,
     IEnumerable<BuildableModelProperty> Properties);
+    

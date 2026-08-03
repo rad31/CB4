@@ -48,7 +48,7 @@ public class BuilderGenerator : IIncrementalGenerator
                 {
                     spc.CancellationToken.ThrowIfCancellationRequested();
                     spc.AddSource($"{model.Name}Proxy.g.cs", ProxyEmitter.Emit(model));
-                    spc.AddSource($"{model.Name}Builder.g.cs", PocoEmitter.Emit(model));
+                    spc.AddSource($"{model.Name}Builder.g.cs", BuilderEmitter.Emit(model));
                 }
             });
     }
