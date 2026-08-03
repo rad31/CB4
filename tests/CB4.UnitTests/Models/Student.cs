@@ -1,6 +1,6 @@
 using Buildable.Attributes;
 
-namespace CB4.UnitTests.ExampleClasses;
+namespace CB4.UnitTests.Models;
 
 [Buildable]
 public class Student
