@@ -8,4 +8,3 @@ public record struct BuildableModel(
     string? FactoryName,
     ConstructorType ConstructorType,
     IEnumerable<BuildableModelProperty> Properties);
-    
