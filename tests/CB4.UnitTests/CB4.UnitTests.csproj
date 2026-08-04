@@ -21,6 +21,7 @@
   
   <ItemGroup>
     <ProjectReference Include="../../src/CB4/CB4.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="../../src/CB4.ExternalExample/CB4.ExternalExample.csproj" />
   </ItemGroup>
 
 </Project>

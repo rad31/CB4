@@ -1,9 +1,9 @@
 namespace CB4.Emitters;
 
-internal static class BuildableAttributeEmitter
+internal static class FactoryAttributeEmitter
 {
     private const string AttributeNamespace = "CB4.Attributes";
-    private const string AttributeName = "BuildableAttribute";
+    private const string AttributeName = "FactoryAttribute";
     internal const string FullyQualifiedAttributeName = $"{AttributeNamespace}.{AttributeName}";
     
     internal static string Emit()
@@ -15,7 +15,7 @@ internal static class BuildableAttributeEmitter
             namespace {{AttributeNamespace}};
 
             [AttributeUsage(AttributeTargets.Class)]
-            internal sealed class {{AttributeName}} : Attribute
+            internal sealed class {{AttributeName}}<T> : Attribute where T : class
             {
             }
             """;

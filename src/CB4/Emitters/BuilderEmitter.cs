@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using CB4.Extensions;
 using CB4.Models;
+using static CB4.Helpers.NamingHelper;
 
 namespace CB4.Emitters;
 
@@ -47,7 +48,7 @@ internal static class BuilderEmitter
     
     private static string GetBuildMethod(BuildableModel model)
     {
-        return model.ContructorType switch
+        return model.ConstructorType switch
         {
             ConstructorType.WithoutArguments => GetDefaultConstructor(model),
             ConstructorType.WithArguments => GetArgumentConstructor(model),
@@ -133,8 +134,8 @@ internal static class BuilderEmitter
                 
                 public {{builderName}}({{model.Name}} {{argumentName}})
                 {
-                   {{BackingFieldName}} = new {{proxyName}}
-                   {
+                    {{BackingFieldName}} = new {{proxyName}}
+                    {
             """;
         
         var footer = """
@@ -179,7 +180,4 @@ internal static class BuilderEmitter
             }     
             """;
     }
-    
-    private static string GetBuilderName(BuildableModel model) => $"{model.Name}Builder";
-    private static string GetProxyName(BuildableModel model) => $"{model.Name}Proxy";
 }

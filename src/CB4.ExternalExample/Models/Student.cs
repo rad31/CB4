@@ -1,8 +1,5 @@
-using CB4.Attributes;
+﻿namespace CB4.ExternalExample.Models;
 
-namespace CB4.UnitTests.Models;
-
-[Buildable]
 public class Student
 {
     public string? FirstName { get; set; }
