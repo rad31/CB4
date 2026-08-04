@@ -1,9 +1,5 @@
-using System;
-using CB4.Attributes;
+namespace CB4.ExternalExample.Models;
 
-namespace CB4.UnitTests.Models;
-
-[Buildable]
 public record Pet(
     string Name,
     int Age,

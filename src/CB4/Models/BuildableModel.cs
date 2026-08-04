@@ -5,6 +5,7 @@ namespace CB4.Models;
 public record struct BuildableModel(
     string Ns,
     string Name,
-    ConstructorType ContructorType,
+    string? FactoryName,
+    ConstructorType ConstructorType,
     IEnumerable<BuildableModelProperty> Properties);
     

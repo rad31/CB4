@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/CB4.ExternalExample/CB4.ExternalExample.csproj" />
     <Project Path="src/CB4/CB4.csproj" />
   </Folder>
   <Folder Name="/tests/">
